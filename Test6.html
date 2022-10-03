@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr-CM">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Déplacement dans le DOM</title>
+    <style>
+        h1,p,ul,li{
+            /*color: lightblue;*/
+            color: black;
+            /*border: 2px solid green;
+            padding: 5px;
+            margin: 5px;
+            display: block;*/
+        }
+    </style>
+</head>
+<body>
+    <a href="Test7.html">Liens pour la lecon suivante</a>
+    <div>
+        <h1>Déplacement Dans le DOM HTML</h1>
+        <p class="p1">Un premier paragraphe</p>
+        <ul>(liste ul)
+            <li class="li1">Premier élément de liste</li>
+            <li>Deuxième élément de liste</li>
+            <li>Troisième élément de liste</li>
+            <li class="li4">Quatrième élément de liste</li>
+        </ul>
+        <p class="p2">Un autre paragraphe</p>
+        <p class="p3">Un troisième paragraphe</p>
+    </div>
+    
+    <ul class="l11">
+        <li class="li1">Premier élément de la liste</li>
+        <li>Deuxième élément de la liste
+            <ul class="l22">
+                <li>Elèment 1 de sous liste</li>
+                <li>Elèment 2 de sous liste</li>
+                <li>Elèment 3 de sous liste</li>
+            </ul>
+        </li>
+        <li>Troisième élément de liste</li>
+    </ul>
+    <p>Element p parent du <!--span>Premier span</span--></p>
+    <ul>
+        <li>Elément p parent du <!--span>span n°2</span--></li>
+        <li>Deuxième élèment li</li>
+        
+    </ul>
+    <ul class="l1">
+        (Elt ul n°1)
+        <li>Premier élément de liste (elt li n°1.1)</li>
+        <li>Elément li contenant (elt li n°1.2)
+            <ul class="l2">(elt ul n°2)
+                <li>une autre liste (elt li n°2.1)</li>
+                <li>avec notre (elt li n°2.2) <span>span</span></li>
+            </ul>
+        </li>
+        <li>Troisième élément de liste (elt li n°1.3)</li>
+    </ul>
+    <script src="jquery-3.6.0.js"></script>
+    <script>
+        /**
+         * On va principalement utiliser trois méthode en jquery pour déplacer les éléments à
+         * savoir: parent():permet d'accèder au parent direct d'un certain élèment 
+         * ou une collection d'élèment.
+         * parents():permet d'accèder à tout les parents contrairement à parent sans (s) ceux ci
+         * jusqu'à la racine du document ie l'élèment html.
+         * parentuntil():permet d'accèder à tout les parents d'un élément ou d'une collection
+         * d'un élément jusqu'à un certain élément parent que l'on va préciser en argument cette fois
+         * ci.
+         * 
+         * ==================================================
+         * maintenant apprenons à accèder à un élément enfant
+         * ==================================================
+         * Pour cela nous allons utiliser deux méthodes à savoir:
+         * children(): va retourner tout les enfants directs d'un élèment, on l'utilise
+         * sans argument. 
+         * et find(): va permettre d'accèder à tout les élèments enfants et doit etre utiliser
+         * avec un argument obligatoirement.
+         * pour accèder à un élèment de même niveau on peut utiliser les méthodes:
+         * siblings() et next() nextuntil() prev() prevall() et prevuntil()
+         * siblings(): pour accèder à des fréres directs
+         * next(): pour accèder à des éléments fréres suivant précisé
+         * nextAll(): pour accèder à tout les élèments frére suivant précisé.
+         * nextuntil(): pour accèder à tout les éléments frére préciser jusqu'à un certain
+         * élément préciser.
+         * */
+        $(document).ready(function(){
+            //Les élèments parent de nos spab vont avoir une couleur rouge
+            //$('span').parent().css('color','red');
+            $('span').parentsUntil('.l1').css({
+                'color':'orange',
+                'border':'2px solid blue',
+                'padding': '5px',
+                'margin': '5px'
+            });
+            //$('.l11').find('*').css('color','red');
+            //change la couleur des élèments frére de h1 en rouge
+            //$('h1').siblings('.p1').css('color','red');
+            $('h1').next().css('color','red');
+            $('.p1').nextAll().css('color','purple');
+            $('.li1').nextUntil('.li4').css('color','orange');
+            //meme principe pour les prev
+            $('.p3').prev().css('color','blue');
+            $('.p2').prevAll().css('color','green');
+            $('.li4').prevUntil('.li1').css('color','gray');
+
+        });
+    </script>
+    
+</body>
+</html>

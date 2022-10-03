@@ -1,0 +1,3 @@
+voici un petit Test que je suis
+entrain de faire enfin de tester la méthode load()
+en jQuery Oooooh Yes ca va peter

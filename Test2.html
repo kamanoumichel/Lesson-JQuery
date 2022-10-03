@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion d'évènement au clavier</title>
+</head>
+<body>
+    <h1>Gestion d'évènement en jQuery</h1>
+    <label for="prenom">Entrez votre prenom</label>
+    <input type="text" name="prenom" id="prenom">
+    <label for="nom">Entrez votre nom</label>
+    <input type="text" name="nom" id="nom">
+    <p>Le Dernier caractère tapé est: <span id="ascii"></span></p>
+    <button class="sl1">teste slide</button>
+    <div id="bck">On essaye de testé la fonction</div>
+    <div id="bck2">Un autre test sur la fonction animate()!</div>
+    <button id="bck1">animation1</button> <br>
+    <button id="ani2">animation2</button> <br>
+    <a href="Test3.html">Gestion des évènements des formulaires</a>
+    <script src="jquery-3.6.0.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#prenom').keydown(function(){
+                $(this).css("background-color","#69C");
+            });
+            $("#prenom").keyup(function(){
+                $(this).css("background-color","#C72");
+            });
+            //exemple of use of callback function
+            $(".sl1").click(function(){
+                $("p").slideToggle('slow',function(){
+                    alert("The paragraph is now slide");
+                });
+            });
+            /**Implémentation du slide les syntaxe sont les suivants:
+             *$(selector).slideDown(speed,callback); is used to slide down 
+             *an element.
+             *The jQuery slideUp() method is used to slide up an element.
+             *The jQuery slideToggle() method toggles between the 
+             *slideDown() and slideUp() methods.
+             * 
+            */
+        });
+        $(document).ready(function(){
+            $("#nom").keypress(function(e){
+                var touche=String.fromCharCode(e.which);
+                $("#ascii").text(touche);
+            });
+            $("#bck1").click(function(){
+            $("#bck").animate({
+                rigth: '250px',
+                opacity: '0.5',
+                height: '+=150px',
+                width: '-=150px'
+            });
+            $("#ani2").click(function(){
+                $("#bck2").animate({
+                    height: 'toggle'
+                }
+                );
+            });
+        });
+        });
+        /**
+         * Is it possible to manipulate ALL CSS properties with the animate() method
+         * Yes, almost! However, there is one important thing to remember: all
+         * property names must be camel-cased when used with the animate() method:
+         * You will need to write paddingLeft instead of padding-left, marginRight
+         * instead of margin-right, and so on.
+         * Also, color animation is not included in the core jQuery library.
+         * If you want to animate color, you need to download the Color Animations
+         * plugin from jQuery.com.
+         * 
+         * It is also possible to define relative values (the value is 
+         * then relative to the element's current value). 
+         * This is done by putting += or -= in front of the value
+         * 
+         * 
+         * By default, jQuery comes with queue functionality for animations.
+         * This means that if you write multiple animate() calls after each other
+         * jQuery creates an "internal" queue with these method calls. Then it runs
+         * the animate calls ONE by ONE.
+         * 
+         * 
+         * $(function(){
+            $("#bck1").click(function(){
+             //Ne fonctionne pas
+                $("#bck").animate({rigth:'250px'});
+            });
+        }); 
+         */        
+        
+    </script>
+</body>
+</html>

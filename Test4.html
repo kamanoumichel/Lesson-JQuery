@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr-CM">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des événements Avancée</title>
+    <style>
+        #div1{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gestion Des Evenements Avancée</h1>
+    <div id="div1">
+        <p>Un premier paragraphe</p>
+        <p>Un autre paragraphe</p>
+    </div>
+    <form action="#">
+        <label for="fcs">Champ à focus</label>
+        <input type="text" name="fcs" id="fcs" placeholder="Je veux un focus">
+        <button id="trg">Forcer le focus avec trigger</button>
+        <button id="trgh">Forcer le focus avec triggerHandler</button>
+        <br><span id="msg1"></span>
+    </form>
+    <span id="msg"></span>
+    <br> 
+    <h3>Test de la méthode off()</h3>
+    <button id="b1">Pas de clic possible</button>
+    <button id="b2">Ajout de gestionnaire d'évenement click</button>
+    <button id="b3">Suppression de gestionnaire d'événement click</button>
+    <br><span id="mssg">Bouton cliqué</span>
+    <br>
+    <h3>Connaitre le type d'un évènement</h3>
+    <p class="p">Un premier paragraphe</p>
+    <p class="p">un autre paragraphe</p>
+    <span id="msssg"></span>
+    <br><a href="Test5.html">Manipulation du DOM</a>
+    <script src="jquery-3.6.0.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.p').on('click mouseover mouseout',function(e){
+                $('#msssg').text('Evènement déclanché: ' +e.type);
+            });
+            $("p").on("click",function(){
+                $(this).hide();
+            });$("#div1").on({
+                mouseenter: function(){
+                    $('#msg').text("Vous êtes entrez dans le Div!!!");
+                },
+                mouseleave: function(){
+                    $('#msg').text("Vous êtes sorti du Div!");
+                }
+            });
+            $("#trg").on('click',function(){
+                $('#fcs').trigger('focus');
+            });
+            $('#trgh').click(function(){
+                $('#fcs').triggerHandler('focus');
+            });
+            $("#fcs").focus(function(){
+                $('#msg1').text('Vous avez déclanché un Focus');
+            }
+            );
+            $('#mssg').hide();
+            //$("#mssg").show();
+            $('#b2').click(function(){
+                $('#b1').on("click",function(){
+                    $("#mssg").show();
+                });
+                $('#b1').text('Vous pouvez maintenant me cliquer');
+            });
+            $('#b3').click(function(){
+                $('#b1').off('click');
+                //On pouvais ne rien passé en paramétre mais la précision est toujours
+                //Importante sinon ca supprime tout les évènements.
+                $('#b1').text('Plus de click possible!');
+            });
+            /***
+             * Pour connaitre le type d'événement déclanché on va utilisé la méthode
+             * type() enfin de pouvoir par exemple le désactivé nous allons
+             * utilisé la ppté type de l'object js event
+             * */
+
+            /*$("#div1").on('mouseenter mouseleave',function(){
+                $('#msg').text('Vous êtes entrez ou sorti du div');
+            });*/
+        });
+        /**La méthode on() deviens intéressante lorsque on veut utiliser plusieurs
+         * événement sur un seul élèment.
+         *
+         * Nous allons apprendre a gerer le déclachement d'événement grâce a la
+         * méthode  trigger() et triggerhandler(): les deux prennent en argument
+         * le nom d'un événement et on peut passé d'autre événement qui sont optionnel
+         * 
+         * trigger va déclaché l'événement spécifié en argument ainsi que le comportement
+         * par défaut de l'évenement s'execute pour tout les éléments ciblé
+         * 
+         * tandis que triggerhandler ne va pas déclanché le comportement par défaut de
+         * l'événement s'execute que pour le premier élément ciblé rencontré
+         * 
+         * On va apprendre à supprimer un gestionnaire d'événement avec
+         *  la méthode off
+         * qui ont été attaché avec la méthode on cette méthode remplace deux anciennes
+         * méthodes jquery qui sont "onbind et ondelete()"
+         * on va utilisé off avec ou sans argument
+         * 
+         * 
+         * The jQuery stop() method is used to stop an animation or effect before it
+         * is finished.
+         * The stop() method works for all jQuery effect functions, including sliding,
+         * fading and custom animations.
+         * Syntax:$(selector).stop(stopAll,goToEnd);
+         * 
+         * The optional stopAll parameter specifies whether 
+         * also the animation queue should be cleared or not. 
+         * Default is false, which means that only the active animation will be stopped, 
+         * allowing any queued animations to be performed afterwards.
+         * 
+         * 
+         * The optional goToEnd parameter specifies whether or not to complete the 
+         * current animation immediately. Default is false.
+         * 
+         * So, by default, the stop() method kills the current animation being 
+         * performed on the selected element.
+         * */
+    </script>
+</body>
+</html>

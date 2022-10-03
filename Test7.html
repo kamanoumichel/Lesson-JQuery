@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtrer les éléments du DOM</title>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        td,th{
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Filtrer Les Elements HTML</h1>
+    <p>Un premier paragraphe</p>
+    <p>Un deuxième paragraphe</p>
+    <p>Un troisième paragraphe</p>
+    <p>Un dernier paragraphe</p>
+    <ul>
+        <li>Elément n°1 de la liste</li>
+        <li>Elément n°2 de la liste</li>
+        <li>Elément n°3 de la liste</li>
+        <li>Elément n°4 de la liste</li>
+    </ul>
+    <table>
+        <tr><th>PRENOM</th><th>NOM</th></tr>
+        <tr><td>Marie</td><td>Pierre</td></tr>
+        <tr><td>Mkgm</td><td>Max</td></tr>
+        <tr><td>Michou</td><td>Promax</td></tr>
+        <tr><td>Hosanna</td><td>Shekina</td></tr>
+    </table>
+    <a href="Test8.html">Lien pour la prochaine lecon</a>
+    <script src="jquery-3.6.0.js"></script>
+    <script>
+        /**
+         * Pour filtrer les éléments du DOM on distingue les méthodes:
+         * first();last();eq();filter() et not()
+         * fisrt() et last(): retourne le premier et le dernière élément d'une collection
+         * d'élément et n'ont pas besoin d'argument pour fonctionner.
+         * pour cible n'inporte quel element d'une collection on peut utiliser la methode
+         * eq() cette méthode va prendre en argument l'index relative à l'element que l'on
+         * veut cibler rappellons premier élément index 0...etc si on founir un index negative
+         * cette méthode va compter en pattant de la fin donc -1 correspond au dernier element 
+         * ainsi de suite.
+         * la méthode filter() va nous permettre de cibler certain element dans une collection
+         * d'element en utilisant certain critére passer en argument de la methode ce critere peut
+         * être un selecteur css qu'une fonction
+         * la methode not() fait le contrainre de filter il permet de cibler les élément ne 
+         * possédant pas certain critère dans une collection d'élément.
+        */
+       $(document).ready(function(){
+        //$('p').first().css('color','red');
+        //$('p').last().css('color','blue');
+        $('p').eq(1).css('color','red');
+        $('p').eq(-2).css('color','orange');
+        $('li').filter(':nth-child(even)').css('color','purple');
+        $('tr').filter(':nth-child(odd)').css('background-color','orange');
+
+        $('li').not(':nth-child(even)').css('color','yellow');
+        $('tr').not(':nth-child(odd)').css('background-color','yellow');
+        //even et odd signifie paire et impaire en francais.
+       });
+    </script>
+</body>
+</html>

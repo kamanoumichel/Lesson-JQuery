@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer des animations personnalisées</title>
+    <style>
+        h1{
+            background-color: orange;
+            border: 2px solid black;
+            position: relative;
+        }
+        div{
+            background-color: purple;
+            border: 2px solid palegoldenrod;
+            position: relative;
+            height: 50px;
+            width: 50px;
+        }
+        .bleu{
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Créer des animations personnalisées.</h1>
+    <button id="b1">Rapetisser le block</button>
+    <button id="b2">Rapetisser le text</button>
+    <button id="b3">Décaler le titre vers la droite</button>
+    <hr>
+    <h1 id="h1">Exemple n°2:</h1>
+    <button class="b11">Animer le titre !</button>
+    <br><br><hr>
+    <h1 id="h11">Gestion Des animations Avancées</h1>
+    <hr>
+    <div></div>
+    <button id="b22">Animer le div !</button>
+    <button id="b33">Arrêter l'animation !</button>
+    <!--p>Taille de la queue: <span></span></p-->
+    <script src="jquery-3.6.0.js"></script>
+    <script>
+        /**
+         * La fonction animate() permet de creer des animations personnalisées Elle fonctionne
+         * avec les pptés CSS certain pptés css demandes les plugins pour pouvoir être utiliser
+         *par exemple la pptée color ne va pas pouvoir être utiliser a moins d'utiliser le
+         plugin jQuery color 
+        */
+       $(document).ready(function(){
+            $('#b1').click(function(){
+                //On met -=10% Pour réduire le bloc initiale à moins 10% sans toute fois connaitre
+                //la longueur du block
+                /**
+                 * Nb: Avec la méthode animate() il faut noté que les pptés css utilise le
+                 * Camel Case
+                 * Il est aussi possible de gerer plusieurs animations d'un coup avec la méthode
+                 * animate().
+                 * */
+                $('h1').animate({width:'-=10%'},1000);//1000 représente le temps de l'animation.
+            });
+            $('#b2').click(function(){
+                $('h1').animate({fontSize:'20px'},5000);
+            });
+            $('#b3').click(function(){
+                $('h1').animate({left:'10px'},2000);
+            })
+            //Ici tout les effets se lance en même temps.
+            $('.b11').click(function(){
+                //$('#h1').animate({width:'-=10%',fontSize:'10px',left:'10px'},1000);
+                //On peut chainer les méthodes comme suit. car le JQuery va créer des effets de queue.
+                $('#h1')
+                .animate({width:'-=10%'},{queue:false,duration:5000})
+                .animate({fontSize:'20px'},2000)
+                .fadeTo(2000,0.5);
+            });
+            $('#b22').click(function(){
+                /*$('#h11')
+                .animate({width:'-=10%'},5000)
+                .animate({fontSize:'20px'},2000)
+                .fadeTo(2000,0.5);*/
+                $('div')
+                    .animate({left:'+=200px'},1000)
+                    .delay(1000)
+                    .animate({top:'+=50px'},400)
+                    .queue(function(){
+                        //Supprimer le dequeue() et faite un constat
+                        $(this).toggleClass('bleu').dequeue();
+                    })
+                    .animate({left:'+=200px'},1000)
+                    .delay(3000)
+                    .animate({top:'+=50px'},400);
+            });
+            /*function enAttente(){
+                //On va pouvoir passer une fonction de rappel en deuxième argument de la méthode
+                //queue() enfin d'interagir avec la file d'attente.On va ainsi pouvoir ajouter de nouvelle
+                //animation dans notre file d'attente par exemple si on le souhaite. si on ajoute des effets 
+                //de rappel on va impérativement utiliser la méthode dqueue() en de dire au jQuery de continué
+                //d'exécuté les animations suivantes.
+                var n= $('#h11').queue('fx');
+                $('span').text(n.length);
+                //Enfin d'actualiser la longueur de la file d'attente on va pouvoir utiliser
+                //la méthode setTimeout()
+                setTimeout(enAttente,10); 
+            }
+            enAttente();*/
+            $("#b33").click(function(){
+                //$("div").clearQueue();
+                //Enfin de stopper les animations.
+                //$("div").stop(true);
+                //$("div").stop(); par défaut et c'est false
+                //$("div").stop(true,true);
+                $("div").finish();//Part directement à la valeur finale de l'animation
+                //La méthode delay(): permet de mettre les pauses entre les animations
+                //clearqueue():Supprime tout les animations de la file d'attente
+                /**
+                 * Bon il existe également les fonctions finish() et stop() permettant
+                 * de supprimer une animation ou de supprimer une fonction de la file
+                 * d'attente. stop() peut prendre 2 argument à savoir true et false
+                 * */
+            });
+       });
+       /**
+        *JQuery utilise aussi le concept de queue pour organiser les animations lorsque l'on
+        *applique plusieurs animations par exemple.
+        *============================================================================
+        *Il existe également les méthodes jQuery pour gérer les queue à savoir:
+        *dequeue() et clearqueue() bien attentue les queues permettent de gerer les files
+        *d'attentes le nom par défaut de la file d'attente jQuery est fx bon à savoir
+        *et c'est implicite donc par besoin de précision
+        *==============================================================================
+        *finalement la méthode clearqueue() va permettre de supprimer tout les fonctions
+        *dans la file d'attente elle est aasez similiaire à la méthode stop().
+        * */
+    </script>
+</body>
+</html>

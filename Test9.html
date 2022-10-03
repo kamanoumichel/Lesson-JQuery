@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr-CM">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modification Des Styles CSS</title>
+    <style>
+        div{border: 1px solid black;}
+        .defaut{font-size: 30px;}
+        p{font-size: 16px; width: 500px; height: 20px;}
+        .orange{background-color: orange;}
+        .gras{font-weight: bold;}
+        .centre{text-align: center;}
+        #p1,#p2{margin: 20px 5px 10px 8px;padding: 10px 20px;border: 1px solid black;}
+    </style>
+</head>
+<body>
+    <h1>Modification Des Styles CSS</h1>
+    <div id="mondiv" class="defaut">
+        <p>Premier paragraphe</p>
+        <p>Deuxième paragraphe</p>
+    </div>
+    <br><span id="msg"></span><br>
+    <button id="b1">Ajouter des attributs class au div</button>
+    <button id="b2">Enlever des attributs class au div</button>
+    <button id="b3">Toggle des attributs class</button>
+    <button id="b4">Modifier la couleur des paragraphes</button>
+    <hr>
+    <h1>Gestion Des Dimensions</h1>
+    <p id="p1">Premier paragraphe</p>
+    <p id="p2">Deuxième paragraphe</p>
+    <span id="sp1"></span><br>
+    <span id="sp2"></span><br><br>
+
+    <button id="bb1">Changer la taille</button>
+    <hr>
+    <div id="div1">
+        
+    <h2>jQuery and AJAX is FUN!!!</h2>
+    <p id="p1">This is some text in a paragraph.</p>
+
+    </div>
+    <script src="jquery-3.6.0.js"></script>
+    <script>
+      /**
+       * Pour AJouter un attribut class à un élément HTML on peut utiliser la méthode
+       * addClass()
+       *  addClass() - Adds one or more classes to the selected elements
+       * removeClass() - Removes one or more classes from the selected elements
+       * toggleClass() - Toggles between adding/removing classes from the selected elements
+       * css() - Sets or returns the style attribute
+       * css() peut agir comme setter et getter.
+       * */  
+      $(document).ready(function(){
+        $('#b1').click(function(){
+            $('#mondiv').addClass('orange gras centre');
+        });
+        $('#b2').click(function(){
+            $('#mondiv').removeClass('defaut orange gras centre');
+        });
+        $('#b3').click(function(){
+            //add and remove
+            $('#mondiv').toggleClass('orange gras centre');
+        });
+        var taille=$('p').css('font-size');
+        $('#msg').text('Taille du text de base: '+taille);
+        $('#b4').click(function(){
+            $('p').css({
+                "color":"lime",
+                "font-size":"20px"
+            });
+            $('p').css('font-style','italic');
+        });
+        /**
+         * ===================================================================
+         *                  Gestion des dimensions en jQuery
+         * ====================================================================
+         * Le jQuery va founir un ensemble de méthode pour manipuler les dimensions
+         * d'un élément du DOM à savoir:
+         * width() retourne la largeur d'un élément
+         * height() retourne la hauteur d'un élément
+         * innerWidth() retourne la largeur et le padding d'un élément
+         * innerHeight() retourne la hauteur et le  padding d'un élément
+         * 
+         * 
+         * outerWidth() retorne la largeur le padding et la bordure d'un élement
+         * outerHeight() retorne la hauteur le padding et la bordure d'un élement
+         * ces méthodes peuvent prendre en plus des value true ou false et lorqu'elle
+         * prennent les valeurs true elle retourne en plus les margins.
+         * 
+         * Ici il faut se souvenir du modèle des boites css.
+         * */
+
+      });
+    </script>
+    <script src="Test9.js"></script>
+</body>
+</html>

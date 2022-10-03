@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr-CM">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des évènement des formulaires</title>
+</head>
+<body>
+    <h1>Gestion des évènement des formulaires</h1>
+    <form action="#" id="fo1">
+        <fieldset id="fld">
+            <label for="prenom">Entrez votre prenom</label>
+            <input type="text" name="prenom" id="prenom">
+            <br>
+            <label for="nom">Entrez votre prenom</label>
+            <input type="text" name="nom" id="nom">
+        </fieldset>
+        <select id="liste">
+            <option value="c1" selected="selected">Choix 1</option>
+            <option value="c2">Choix 2</option>
+            <option value="c3">Choix 3</option>
+        </select>
+        <input type="submit" value="Envoyer!">
+    </form>
+    <br>
+    <a href="Test4.html">Gestion des événements avancée</a>
+    <script src="jquery-3.6.0.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#fld").focusin(function(){
+                $(this).css('background-color','yellow');
+            });
+            $("#fld").focusout(function(){
+                $(this).css('background-color','white');
+            });
+            
+            $("#prenom").focus(function(){
+                $(this).css('background-color','lightblue');
+            });
+            $("#prenom").blur(function(){
+                $(this).css('background-color','white');
+            });
+            $("#liste").change(function(){
+                alert('Nouvelle Option Selectionner!');
+            });
+            $("#fo1").submit(function(){
+                alert('Le formulaire a bien été envoyer merci pour votre confiance');
+            });
+        });
+       /* $(document).ready(function(){
+            $("#prenom").focus(function(){
+                $(this).css('background-color','yellow');
+            });
+        });*/ 
+        /**
+         * Pour gerer la perte de focus tres souvent nous allons utilisé la méthode
+         * blur() avec focus() et la méthode focusout() avec focusin() exple plus haut
+         * l'événement change() permet de detecter un changement de valeur dans un champ
+         * de formulaire et ne va bien fonctionner que avec les élèments:
+         * input,textarea et select nb:l'événement se déclache immédiatement avec les 
+         * cases à cocher, les boutons radio et les select mais ne va se déclaché qu'aprés
+         * la perte de focus()
+         */
+        //la méthode submit() correspond à l'envoie du formulaire
+    </script>
+</body>
+</html>
